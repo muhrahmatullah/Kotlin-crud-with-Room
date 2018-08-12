@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rahmat.app.samplecrudkotlin.DetailActivity
+import com.rahmat.app.samplecrudkotlin.features.detail.DetailActivity
 import com.rahmat.app.samplecrudkotlin.R
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import kotlinx.android.synthetic.main.student_item_view.view.*
