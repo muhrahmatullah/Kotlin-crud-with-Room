@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="6dp"
+    android:layout_height="wrap_content">
 
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:elevation="4dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:id="@+id/student_icon"
+                android:src="@mipmap/ic_launcher"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="82dp"
+                    android:layout_centerVertical="true"
+                    android:background="#464545"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/student_icon"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@id/student_icon">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_name"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Nama : Muh. Rahmatullah"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_nim"
+                    android:layout_marginTop="4dp"
+                    tools:text="Nim : 12345675"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_gender"
+                    android:layout_marginTop="4dp"
+                    tools:text="Jenis Kelamin : Laki-laki"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
