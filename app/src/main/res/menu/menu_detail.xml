@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/ic_edit_black_24dp"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:title="edit"/>
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/ic_delete_black_24dp"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:title="delete"/>
 
 </menu>

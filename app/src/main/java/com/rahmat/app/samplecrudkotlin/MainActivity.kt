@@ -52,17 +52,10 @@ class MainActivity : AppCompatActivity() {
     fun Context.toast(message: CharSequence) =
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     fun addDummyData(){
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
-        students.add(Student("Muhammad Rahmatullah", "D42114009", "Laki-laki"))
+        students.add(Student(0,"Muhammad Rahmatullah", "D42114009", "Laki-laki"))
+        students.add(Student(0,"Muhammad Rahmatullah", "D42114009", "Laki-laki"))
+        students.add(Student(0,"Muhammad Rahmatullah", "D42114009", "Laki-laki"))
+        students.add(Student(0,"Muhammad Rahmatullah", "D42114009", "Laki-laki"))
+        students.add(Student(0,"Muhammad Rahmatullah", "D42114009", "Laki-laki"))
     }
 }
