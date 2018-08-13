@@ -13,7 +13,6 @@ import com.rahmat.app.samplecrudkotlin.entity.Student
 abstract class StudentDatabase : RoomDatabase() {
 
     abstract fun studentDao(): StudentDao
-
     companion object {
         private var INSTANCE: StudentDatabase? = null
 
