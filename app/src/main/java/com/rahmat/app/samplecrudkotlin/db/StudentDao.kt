@@ -19,6 +19,6 @@ interface StudentDao {
     @Delete
     fun delete(student: Student)
 
-    @Update(onConflict = REPLACE)
-    fun update(student: Student)
+    @Query("UPDATE students SET name =:studentName, nim =:studentNim, gender =:studentGen WHERE id =:studentId")
+    fun update(studentId: Long, studentName:String, studentNim:String, studentGen:String)
 }
