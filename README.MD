@@ -6,9 +6,9 @@ This application demonstrated use of Room persistence storage with create, read,
 
 <img src="https://github.com/muhrahmatullah/Kotlin-crud-with-Room/blob/mvp-pattern/screenshots/home.png"
 width="256">&nbsp;&nbsp;&nbsp;
-<img src="https://github.com/muhrahmatullah/Dicoding-Movie-Catalogue/blob/mvp-pattern/screenshots/add.png"
+<img src="https://github.com/muhrahmatullah/Kotlin-crud-with-Room/blob/mvp-pattern/screenshots/add.png"
 width="256">&nbsp;&nbsp;&nbsp;
-<img src="https://github.com/muhrahmatullah/Dicoding-Movie-Catalogue/blob/mvp-pattern/screenshots/detail.png"
+<img src="https://github.com/muhrahmatullah/Kotlin-crud-with-Room/blob/mvp-pattern/screenshots/detail.png"
 width="256">&nbsp;&nbsp;&nbsp;
 
 ### Tech stack
