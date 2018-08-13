@@ -30,8 +30,6 @@ abstract class StudentDatabase : RoomDatabase() {
 
         fun destroyInstance() {
             INSTANCE = null
-
         }
-
     }
 }
