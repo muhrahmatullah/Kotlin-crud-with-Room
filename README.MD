@@ -8,8 +8,8 @@ This application demonstrated use of Room persistence storage with create, read,
 * [x] RxJava
 
 ### Todo
-* [] MVP approach
-* [] Dagger
+* [ ] MVP approach
+* [ ] Dagger
 
 ## Author
 
