@@ -17,19 +17,15 @@ w
 Gapp/src/main/java/com/rahmat/app/samplecrudkotlin/db/StudentDatabase.kt,7/e/7e53292eee022d8742a6e2f81957aebdaba68f55
 r
 Bapp/src/main/java/com/rahmat/app/samplecrudkotlin/db/StudentDao.kt,b/d/bdfeaea1af1273bf4177823849318ce9464ba688
-q
-Aapp/src/main/java/com/rahmat/app/samplecrudkotlin/di/AppModule.kt,2/e/2ee3fe5ef84813224f4e505f09f1a96b3df95163
 Z
 *app/src/main/res/layout/content_detail.xml,e/c/eca00e09332fcaea39abc5021622b9fb09ef4b45
 x
 Happ/src/main/java/com/rahmat/app/samplecrudkotlin/adapter/ItemAdapter.kt,f/e/fe3ca21b77a42de83227b38537d1a15ede615732
 ƒ
 Sapp/src/main/java/com/rahmat/app/samplecrudkotlin/features/detail/DetailActivity.kt,7/1/71e28f11a41e0fb310cdd82d5cb8f27a6a79bbfd
-
-Oapp/src/main/java/com/rahmat/app/samplecrudkotlin/features/main/MainContract.kt,7/d/7d2fe37475058f9bdc94d41bc7449b24cf89552e
 s
 Capp/src/main/java/com/rahmat/app/samplecrudkotlin/entity/Student.kt,8/a/8a4934a5014a0e1792d1d830cba2a44dd90a0eae
-€
-Papp/src/main/java/com/rahmat/app/samplecrudkotlin/features/main/MainPresenter.kt,3/4/3418f8fc73a4bfffec2b81af073935eaf056d44b
 
 Oapp/src/main/java/com/rahmat/app/samplecrudkotlin/features/main/MainActivity.kt,c/6/c65ef3862076949aacfceaf6f2a9b36aaf063450
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e

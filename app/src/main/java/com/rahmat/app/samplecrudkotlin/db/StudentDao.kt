@@ -17,8 +17,8 @@ interface StudentDao {
     fun insert(student: Student)
 
     @Delete
-    fun deleteTask(student: Student)
+    fun delete(student: Student)
 
     @Update(onConflict = REPLACE)
-    fun updateTask(student: Student)
+    fun update(student: Student)
 }

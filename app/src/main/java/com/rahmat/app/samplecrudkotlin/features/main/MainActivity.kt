@@ -13,7 +13,6 @@ import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
 import com.rahmat.app.samplecrudkotlin.db.StudentDatabase
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -65,14 +64,14 @@ class MainActivity : AppCompatActivity() {
 
     fun insertToDb(student:Student){
         compositeDisposable.add(Observable.fromCallable{studentDatabase?.studentDao()?.insert(student)}
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe())
     }
 
     fun getAllData(){
         compositeDisposable.add(studentDatabase!!.studentDao().getAll()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe{
                     students.clear()
