@@ -19,6 +19,8 @@ width="256">&nbsp;&nbsp;&nbsp;
 ### Todo
 * [ ] MVP approach
 * [ ] Dagger
+* [ ] Arch component
+* [ ] MVVM approach
 
 ## Author
 
