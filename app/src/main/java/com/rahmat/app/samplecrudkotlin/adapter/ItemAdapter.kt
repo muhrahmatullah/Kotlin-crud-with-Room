@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.student_item_view.view.*
 /**
  * Created by muhrahmatullah on 12/08/18.
  */
-class ItemAdapter(val studentList : ArrayList<Student>, val context : Context)
+class ItemAdapter(val studentList : List<Student>, val context : Context)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
 

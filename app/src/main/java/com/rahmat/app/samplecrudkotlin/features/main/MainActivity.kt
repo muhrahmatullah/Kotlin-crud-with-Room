@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.rahmat.app.samplecrudkotlin.R
+import com.rahmat.app.samplecrudkotlin.R.id.fab_add
+import com.rahmat.app.samplecrudkotlin.R.id.item_recyclerview
 import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
 import com.rahmat.app.samplecrudkotlin.db.StudentDatabase
 import com.rahmat.app.samplecrudkotlin.entity.Student
