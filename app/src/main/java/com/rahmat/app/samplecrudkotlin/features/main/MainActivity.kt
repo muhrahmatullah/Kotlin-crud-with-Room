@@ -2,9 +2,10 @@ package com.rahmat.app.samplecrudkotlin.features.main
 
 import android.content.Context
 import android.content.DialogInterface
-import android.support.v7.app.AppCompatActivity
+import android.databinding.DataBindingUtil.setContentView
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
@@ -12,28 +13,41 @@ import com.rahmat.app.samplecrudkotlin.R
 import com.rahmat.app.samplecrudkotlin.R.id.fab_add
 import com.rahmat.app.samplecrudkotlin.R.id.item_recyclerview
 import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
-import com.rahmat.app.samplecrudkotlin.db.StudentDatabase
+import com.rahmat.app.samplecrudkotlin.databinding.ActivityMainBinding
+import com.rahmat.app.samplecrudkotlin.db.StudentDao
 import com.rahmat.app.samplecrudkotlin.entity.Student
+import com.rahmat.app.samplecrudkotlin.features.base.BaseActivity
+import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.input_dialog.view.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
+
+    override fun getViewModelBindingVariable(): Int {
+        return NO_VIEW_MODEL_BINDING_VARIABLE
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
 
     private val students : ArrayList<Student> = ArrayList()
 
-    private var studentDatabase:StudentDatabase? = null
     val compositeDisposable = CompositeDisposable()
+
+    @Inject
+    lateinit var studentDao: StudentDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        AndroidInjection.inject(this)
         item_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
         item_recyclerview.adapter = ItemAdapter(students, this)
-        studentDatabase = StudentDatabase.getInstance(this)
         getAllData()
 
         fab_add.setOnClickListener {
@@ -65,14 +79,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun insertToDb(student:Student){
-        compositeDisposable.add(Observable.fromCallable{studentDatabase?.studentDao()?.insert(student)}
+        compositeDisposable.add(Observable.fromCallable{studentDao.insert(student)}
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe())
     }
 
-    fun getAllData(){
-        compositeDisposable.add(studentDatabase!!.studentDao().getAll()
+    private fun getAllData(){
+        compositeDisposable.add(studentDao.getAll()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe{
@@ -83,7 +97,6 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        StudentDatabase.destroyInstance()
         compositeDisposable.dispose()
     }
 

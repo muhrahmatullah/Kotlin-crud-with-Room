@@ -25,6 +25,10 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    dataBinding{
+        enabled = true
+    }
 }
 
 ext {
@@ -34,6 +38,9 @@ ext {
 }
 
 dependencies {
+
+    implementation project(':base')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
@@ -61,6 +68,6 @@ dependencies {
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     // view model
     implementation "android.arch.lifecycle:extensions:$lifecycle"
-    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle"
+    kapt "android.arch.lifecycle:compiler:$lifecycle"
 
 }

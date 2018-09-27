@@ -20,17 +20,10 @@ class StudentApplication : Application(), HasActivityInjector{
     override fun activityInjector(): AndroidInjector<Activity> {
         return mActivityInjector
     }
-
-    companion object {
-        var studentDatabase: StudentDatabase? = null
-    }
     override fun onCreate() {
         super.onCreate()
 
         AppInjector.init(this)
 
-        studentDatabase = StudentDatabase.getInstance(this)
     }
-
-
 }

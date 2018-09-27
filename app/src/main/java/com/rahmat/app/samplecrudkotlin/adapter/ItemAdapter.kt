@@ -15,10 +15,8 @@ import kotlinx.android.synthetic.main.student_item_view.view.*
 /**
  * Created by muhrahmatullah on 12/08/18.
  */
-class ItemAdapter(val studentList : List<Student>, val context : Context)
+class ItemAdapter(private val studentList : List<Student>, val context : Context)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(LayoutInflater.from(context).inflate(
