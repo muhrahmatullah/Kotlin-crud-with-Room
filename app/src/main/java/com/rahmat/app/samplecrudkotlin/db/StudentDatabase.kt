@@ -9,7 +9,7 @@ import com.rahmat.app.samplecrudkotlin.entity.Student
 /**
  * Created by muhrahmatullah on 12/08/18.
  */
-@Database(entities = arrayOf(Student::class), version = 1)
+@Database(entities = [Student::class], version = 1)
 abstract class StudentDatabase : RoomDatabase() {
 
     abstract fun studentDao(): StudentDao
@@ -19,12 +19,12 @@ abstract class StudentDatabase : RoomDatabase() {
         fun getInstance(context: Context): StudentDatabase? {
             if (INSTANCE == null) {
                 synchronized(StudentDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                    INSTANCE = Room.databaseBuilder(context.applicationContext,
                             StudentDatabase::class.java, "studentdata.db")
                             .build()
                 }
             }
-            return INSTANCE
+            return INSTANCE as StudentDatabase
         }
 
         fun destroyInstance() {
