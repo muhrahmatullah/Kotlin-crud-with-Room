@@ -1,5 +1,6 @@
 package com.rahmat.app.samplecrudkotlin.db
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import com.rahmat.app.samplecrudkotlin.entity.Student
