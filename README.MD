@@ -15,12 +15,10 @@ width="256">&nbsp;&nbsp;&nbsp;
 * [x] kotlin
 * [x] room
 * [x] RxJava
-
-### Todo
-* [ ] MVP approach
-* [ ] Dagger
-* [ ] Arch component
-* [ ] MVVM approach
+* [x] MVP approach
+* [x] Dagger
+* [x] Arch component
+* [x] MVVM approach
 
 ## Author
 
