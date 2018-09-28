@@ -1,17 +1,14 @@
 package com.rahmat.app.samplecrudkotlin.features.main
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.DialogInterface
-import android.databinding.DataBindingUtil.setContentView
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.rahmat.app.samplecrudkotlin.R
-import com.rahmat.app.samplecrudkotlin.R.id.fab_add
-import com.rahmat.app.samplecrudkotlin.R.id.item_recyclerview
 import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
 import com.rahmat.app.samplecrudkotlin.databinding.ActivityMainBinding
 import com.rahmat.app.samplecrudkotlin.db.StudentDao
@@ -43,12 +40,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     @Inject
     lateinit var studentDao: StudentDao
 
+    lateinit var adapter:ItemAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         item_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
-        item_recyclerview.adapter = ItemAdapter(students, this)
-        getAllData()
+        adapter = ItemAdapter(students, this)
+        item_recyclerview.adapter = adapter
+
+        getViewModel().getStudents().observe(this, Observer<List<Student>> {
+            students.clear()
+            students.addAll(it!!)
+            adapter.notifyDataSetChanged()
+        })
+
+        getViewModel().loadStudent()
 
         fab_add.setOnClickListener {
             val dialogBuilder = AlertDialog.Builder(this)
@@ -78,6 +85,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getViewModel().loadStudent();
+
+    }
+
     fun insertToDb(student:Student){
         compositeDisposable.add(Observable.fromCallable{studentDao.insert(student)}
                 .subscribeOn(Schedulers.computation())
@@ -85,15 +98,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
                 .subscribe())
     }
 
-    private fun getAllData(){
-        compositeDisposable.add(studentDao.getAll()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe{
-                    students.clear()
-                    students.addAll(it)
-                    item_recyclerview.adapter = ItemAdapter(students, this)
-                })
+    private fun getAllData(studentList: List<Student>){
+            item_recyclerview.adapter = ItemAdapter(studentList, this)
     }
     override fun onDestroy() {
         super.onDestroy()

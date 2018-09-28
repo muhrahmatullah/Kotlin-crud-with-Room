@@ -70,4 +70,6 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle"
     kapt "android.arch.lifecycle:compiler:$lifecycle"
 
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycle"
+
 }
