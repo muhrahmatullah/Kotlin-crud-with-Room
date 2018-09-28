@@ -35,17 +35,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     private val students : ArrayList<Student> = ArrayList()
 
-    val compositeDisposable = CompositeDisposable()
-
-    @Inject
-    lateinit var studentDao: StudentDao
-
     lateinit var adapter:ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
-        item_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
+        item_recyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adapter = ItemAdapter(students, this)
         item_recyclerview.adapter = adapter
 
@@ -75,7 +70,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
                     R.id.radio_female -> gender = "Perempuan"
                     else -> gender = "Laki-laki"
                 }
-                insertToDb(Student(studentName.toString(), studentNim.toString(), gender))
+                getViewModel().insertStudent(Student(studentName.toString(),
+                        studentNim.toString(), gender))
                 applicationContext.toast("Data berhasil dimasukkan")
 
             }
@@ -87,23 +83,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun onResume() {
         super.onResume()
-        getViewModel().loadStudent();
+        getViewModel().loadStudent()
 
-    }
-
-    fun insertToDb(student:Student){
-        compositeDisposable.add(Observable.fromCallable{studentDao.insert(student)}
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe())
-    }
-
-    private fun getAllData(studentList: List<Student>){
-            item_recyclerview.adapter = ItemAdapter(studentList, this)
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
     }
 
     fun Context.toast(message:CharSequence){

@@ -7,6 +7,7 @@ import com.rahmat.app.samplecrudkotlin.db.StudentDao
 import com.rahmat.app.samplecrudkotlin.db.StudentDatabase
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 /**
@@ -33,4 +34,6 @@ class AppModule{
     }
 
     @Provides @Singleton fun provideStudentDao(studentDatabase: StudentDatabase) = studentDatabase.studentDao()
+
+    @Provides @Singleton fun provideCompositeDisposable() = CompositeDisposable()
 }

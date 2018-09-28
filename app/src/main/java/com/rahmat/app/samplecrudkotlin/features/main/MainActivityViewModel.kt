@@ -7,6 +7,7 @@ import android.arch.lifecycle.Transformations
 import com.rahmat.app.samplecrudkotlin.R.id.item_recyclerview
 import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
 import com.rahmat.app.samplecrudkotlin.db.StudentDao
+import com.rahmat.app.samplecrudkotlin.db.repository.LocalRepository
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import com.rahmat.app.samplecrudkotlin.features.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,17 +21,16 @@ import javax.inject.Inject
 /**
  * Created by muhrahmatullah on 26/09/18.
  */
-class MainActivityViewModel @Inject constructor(val studentDao: StudentDao) : BaseViewModel() {
+class MainActivityViewModel @Inject constructor(private val localRepository: LocalRepository) : BaseViewModel() {
 
     private var mTriggerFetchData = MutableLiveData<Boolean>()
     private var student : LiveData<List<Student>> = Transformations.switchMap(mTriggerFetchData){
-        LiveDataReactiveStreams.fromPublisher(studentDao.getAll()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.computation())
-        )
+        localRepository.getAllData()
     }
 
-    val compositeDisposable = CompositeDisposable()
+    fun insertStudent(student: Student){
+        localRepository.insertData(student)
+    }
 
     fun getStudents(): LiveData<List<Student>>{
         return student
@@ -38,10 +38,5 @@ class MainActivityViewModel @Inject constructor(val studentDao: StudentDao) : Ba
 
     fun loadStudent() {
         mTriggerFetchData.value = true
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
     }
 }
