@@ -86,7 +86,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                         else -> "Laki-laki"
                     }
                     getViewModel().updateData(student.id, studentName.toString(), studentNim.toString(), gender)
-                    getViewModel().triggerFetchData(student.id.toString())
                     Toast.makeText(this, "Data berhasil diubah $studentName ", Toast.LENGTH_LONG).show()
                 }
                 dialogBuilder.setNegativeButton("Batal") { _: DialogInterface, _: Int ->
