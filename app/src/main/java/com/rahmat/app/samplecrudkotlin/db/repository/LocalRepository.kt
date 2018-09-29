@@ -32,4 +32,22 @@ class LocalRepository @Inject constructor(studentDao: StudentDao, compositeDispo
                 .subscribe())
     }
 
+    fun getDataById(id: String): LiveData<Student>{
+        return LiveDataReactiveStreams.fromPublisher(stDao.getById(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.computation()))
+    }
+
+    fun deleteData(student: Student){
+        comp.add(Observable.fromCallable { stDao.delete(student) }
+                .subscribeOn(Schedulers.computation())
+                .subscribe())
+    }
+
+    fun updateData(id: Long, name: String, nim: String, gen: String){
+        comp.add(Observable.fromCallable { stDao.update(id, name, nim, gen) }
+                .subscribeOn(Schedulers.computation())
+                .subscribe())
+    }
+
 }

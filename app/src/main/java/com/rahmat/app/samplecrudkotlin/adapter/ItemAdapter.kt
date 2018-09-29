@@ -34,7 +34,7 @@ class ItemAdapter(private val studentList : List<Student>, val context : Context
         holder.bindView(studentList[position])
         holder.cardView.setOnClickListener{ v ->
             val intent = Intent(v.context, DetailActivity::class.java)
-            intent.putExtra("student_object", studentList[position])
+            intent.putExtra("student_id", studentList[position].id)
             v.context.startActivity(intent)
         }
     }

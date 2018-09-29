@@ -1,6 +1,8 @@
 package com.rahmat.app.samplecrudkotlin.di
 
 import android.arch.lifecycle.ViewModel
+import com.rahmat.app.samplecrudkotlin.features.detail.DetailActivity
+import com.rahmat.app.samplecrudkotlin.features.detail.DetailViewModel
 import com.rahmat.app.samplecrudkotlin.features.main.MainActivity
 import com.rahmat.app.samplecrudkotlin.features.main.MainActivityViewModel
 import dagger.Binds
@@ -22,4 +24,12 @@ abstract class ActivityBuildersModule {
     @IntoMap
     @ViewModelKey(MainActivityViewModel::class)
     abstract fun bindingMainViewModel(mainActivityViewModel: MainActivityViewModel) : ViewModel
+
+    @ContributesAndroidInjector
+    abstract fun bindDetailActivity() : DetailActivity
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailViewModel::class)
+    abstract fun bindingDetailViewModel(detailViewModel: DetailViewModel) : ViewModel
 }

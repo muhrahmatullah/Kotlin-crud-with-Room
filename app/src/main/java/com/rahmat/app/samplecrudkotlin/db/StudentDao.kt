@@ -14,6 +14,9 @@ interface StudentDao {
     @Query("SELECT * from students")
     fun getAll(): Flowable<List<Student>>
 
+    @Query("SELECT * FROM students WHERE id = :id ")
+    fun getById(id: String): Flowable<Student>
+
     @Insert(onConflict = REPLACE)
     fun insert(student: Student)
 
