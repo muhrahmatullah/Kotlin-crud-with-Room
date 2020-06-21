@@ -9,12 +9,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by muhrahmatullah on 29/09/18.
  */
-@Singleton
 class LocalRepository @Inject constructor(studentDao: StudentDao, compositeDisposable: CompositeDisposable) {
 
     var stDao : StudentDao = studentDao

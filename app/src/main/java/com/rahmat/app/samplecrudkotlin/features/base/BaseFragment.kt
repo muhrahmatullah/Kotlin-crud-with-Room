@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.android.support.AndroidSupportInjection
 
 /**
  * Created by muhrahmatullah on 26/09/18.
@@ -31,7 +30,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : ViewModel> : Fragment() {
     fun getDataBinding() : T = mViewDataBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
     }
 

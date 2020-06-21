@@ -1,7 +1,6 @@
 package com.rahmat.app.samplecrudkotlin.features.base
 
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by muhrahmatullah on 26/09/18.

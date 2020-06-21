@@ -7,33 +7,43 @@ import com.rahmat.app.samplecrudkotlin.db.StudentDao
 import com.rahmat.app.samplecrudkotlin.db.StudentDatabase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 /**
  * Created by muhrahmatullah on 27/08/18.
  */
-@Suppress("unused")
+@InstallIn(ApplicationComponent::class)
 @Module
 class AppModule{
 
-    @Provides
-    @Singleton
-    internal fun provideContext(application: Application) : Context = application
-
+//    lateinit var context: Context
+//
+//    constructor(_context: Context) {
+//        context = _context
+//    }
+//
+//    @Provides
+//    internal fun provideAppContext() : Context = context
+//
+//    @Provides
+//    internal fun provideApplication() : Application = context.applicationContext as Application
 
     @Provides
     @DbName
     fun provideDbName() = "studentdata.db"
 
 
-    @Provides @Singleton fun provideStudentDatabase(context: Context, @DbName dbName: String): StudentDatabase{
+    @Provides fun provideStudentDatabase(@ApplicationContext context: Context, @DbName dbName: String): StudentDatabase{
         return Room.databaseBuilder(context,
                 StudentDatabase::class.java, dbName)
                 .build()
     }
 
-    @Provides @Singleton fun provideStudentDao(studentDatabase: StudentDatabase) = studentDatabase.studentDao()
+    @Provides fun provideStudentDao(studentDatabase: StudentDatabase) = studentDatabase.studentDao()
 
-    @Provides @Singleton fun provideCompositeDisposable() = CompositeDisposable()
+    @Provides fun provideCompositeDisposable() = CompositeDisposable()
 }

@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-//apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -31,12 +31,24 @@ android {
     dataBinding{
         enabled = true
     }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 ext {
     supportLibVersion = '27.1.1'
     lifecycle = '1.1.1'
     dagger2Version = '2.14.1'
+    daggerHiltAndroidVersion =  '2.28-alpha'
+    daggerHiltVersion       =  '1.0.0-alpha01'
 }
 
 dependencies {
@@ -58,8 +70,6 @@ dependencies {
     //di
     implementation "com.google.dagger:dagger:$dagger2Version"
     kapt "com.google.dagger:dagger-compiler:$dagger2Version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
 
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -71,7 +81,20 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
 
-//    implementation "com.google.dagger:hilt-android:2.28-alpha"
-//    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    implementation "com.google.dagger:hilt-android:$daggerHiltAndroidVersion"
+    implementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
+    implementation "androidx.hilt:hilt-common:$daggerHiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
+    kapt "androidx.hilt:hilt-compiler:$daggerHiltVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
 
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
+
+
+}
+
+kapt {
+    correctErrorTypes true
 }
