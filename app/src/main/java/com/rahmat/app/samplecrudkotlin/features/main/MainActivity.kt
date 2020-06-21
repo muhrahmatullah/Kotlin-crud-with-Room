@@ -8,21 +8,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.rahmat.app.samplecrudkotlin.R
 import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
 import com.rahmat.app.samplecrudkotlin.databinding.ActivityMainBinding
-import com.rahmat.app.samplecrudkotlin.db.StudentDao
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import com.rahmat.app.samplecrudkotlin.features.base.BaseActivity
-import dagger.android.AndroidInjection
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.input_dialog.view.*
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
     override fun getViewModelBindingVariable(): Int {
@@ -37,20 +33,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     lateinit var adapter:ItemAdapter
 
+    private val viewModel: MainActivityViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
-        item_recyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        getDataBinding().itemRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adapter = ItemAdapter(students, this)
-        item_recyclerview.adapter = adapter
+        getDataBinding().itemRecyclerview.adapter = adapter
 
-        getViewModel().getStudents().observe(this, Observer<List<Student>> {
+        viewModel.getStudents().observe(this, Observer<List<Student>> {
             students.clear()
             students.addAll(it!!)
             adapter.notifyDataSetChanged()
         })
 
-        getViewModel().loadStudent()
+        viewModel.loadStudent()
 
         fab_add.setOnClickListener {
             val dialogBuilder = AlertDialog.Builder(this)
@@ -70,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
                     R.id.radio_female -> gender = "Perempuan"
                     else -> gender = "Laki-laki"
                 }
-                getViewModel().insertStudent(Student(studentName.toString(),
+                viewModel.insertStudent(Student(studentName.toString(),
                         studentNim.toString(), gender))
                 applicationContext.toast("Data berhasil dimasukkan")
 
@@ -83,7 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun onResume() {
         super.onResume()
-        getViewModel().loadStudent()
+        viewModel.loadStudent()
 
     }
 

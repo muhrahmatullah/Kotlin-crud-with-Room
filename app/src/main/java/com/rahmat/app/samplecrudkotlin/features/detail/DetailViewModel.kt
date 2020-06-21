@@ -1,17 +1,17 @@
 package com.rahmat.app.samplecrudkotlin.features.detail
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.rahmat.app.samplecrudkotlin.db.repository.LocalRepository
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import com.rahmat.app.samplecrudkotlin.features.base.BaseViewModel
-import javax.inject.Inject
 
 /**
  * Created by muhrahmatullah on 29/09/18.
  */
-class DetailViewModel @Inject constructor(private val localRepository: LocalRepository): BaseViewModel() {
+class DetailViewModel @ViewModelInject constructor(private val localRepository: LocalRepository): BaseViewModel() {
 
     val mTriger : MutableLiveData<String> = MutableLiveData()
     val student : LiveData<Student> = Transformations.switchMap(mTriger) {

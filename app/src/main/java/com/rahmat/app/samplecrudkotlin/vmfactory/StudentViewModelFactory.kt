@@ -9,7 +9,6 @@ import javax.inject.Singleton
 /**
  * Created by muhrahmatullah on 27/09/18.
  */
-@Singleton
 class StudentViewModelFactory @Inject constructor(
         private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>)
     : ViewModelProvider.Factory

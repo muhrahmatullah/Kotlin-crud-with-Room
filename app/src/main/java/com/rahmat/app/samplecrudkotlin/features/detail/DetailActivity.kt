@@ -8,16 +8,15 @@ import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.rahmat.app.samplecrudkotlin.R
 import com.rahmat.app.samplecrudkotlin.databinding.ActivityDetailBinding
-import com.rahmat.app.samplecrudkotlin.db.StudentDatabase
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import com.rahmat.app.samplecrudkotlin.features.base.BaseActivity
-
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.content_detail.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.input_dialog.view.*
 
+@AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     override fun getViewModelBindingVariable(): Int {
         return NO_VIEW_MODEL_BINDING_VARIABLE
@@ -30,29 +29,26 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     private lateinit var studentId:String
     lateinit var student: Student
 
-    var studentDatabase:StudentDatabase? = null
+    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(getDataBinding().toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         studentId = intent.getLongExtra("student_id", 0).toString()
 
-        getViewModel().getStudentbyId().observe(this, Observer {
+        viewModel.getStudentbyId().observe(this, Observer {
             student = it!!
             displayStudent(it)
         })
 
-        getViewModel().triggerFetchData(studentId)
+        viewModel.triggerFetchData(studentId)
 
-        studentDatabase = StudentDatabase.getInstance(this)
     }
 
     fun displayStudent(student: Student?){
-        textViewName.text = "Nama = ${student?.name}"
-        textViewNim.text = "Nim = ${student?.nim}"
-        textViewGender.text = "Jenis Kelamin = ${student?.gender}"
+        getDataBinding().layoutDetail.student = student
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -64,7 +60,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.delete -> {
-                getViewModel().deleteData(student)
+                viewModel.deleteData(student)
                 Toast.makeText(this, "Data  ${student.name} berhasil dihapus", Toast.LENGTH_LONG).show()
                 finish()
             }
@@ -85,7 +81,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                         R.id.radio_female -> "Perempuan"
                         else -> "Laki-laki"
                     }
-                    getViewModel().updateData(student.id, studentName.toString(), studentNim.toString(), gender)
+                    viewModel.updateData(student.id, studentName.toString(), studentNim.toString(), gender)
                     Toast.makeText(this, "Data berhasil diubah $studentName ", Toast.LENGTH_LONG).show()
                 }
                 dialogBuilder.setNegativeButton("Batal") { _: DialogInterface, _: Int ->

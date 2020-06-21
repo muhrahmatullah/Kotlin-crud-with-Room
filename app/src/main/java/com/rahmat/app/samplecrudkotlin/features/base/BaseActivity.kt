@@ -1,33 +1,22 @@
 package com.rahmat.app.samplecrudkotlin.features.base
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import android.os.Bundle
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
 import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
 
 /**
  * Created by muhrahmatullah on 26/09/18.
  */
-abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActivity(), HasSupportFragmentInjector {
+abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActivity(){
 
     val NO_VIEW_MODEL_BINDING_VARIABLE = -1
 
     private lateinit var mViewModel: V
     private lateinit var mViewDataBinding: T
-
-    @Inject
-    lateinit var mViewModelFactory : ViewModelProvider.Factory
 
     abstract fun getViewModelBindingVariable() : Int
 
@@ -38,20 +27,12 @@ abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActiv
 
     fun getDataBinding() : T = mViewDataBinding
 
-    @Inject
-    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         performDataBinding()
-        provideViewModel()
+//        provideViewModel()
 
-    }
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return mFragmentInjector
     }
 
     private fun performDataBinding() {
@@ -68,7 +49,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActiv
 
     private fun provideViewModel() {
         val clazz = getViewModelClass(javaClass)
-        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(clazz)
     }
 
     private fun getViewModelClass(aClass: Class<*>): Class<V> {
