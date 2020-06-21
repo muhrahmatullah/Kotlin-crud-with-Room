@@ -1,9 +1,9 @@
 package com.rahmat.app.samplecrudkotlin.features.main
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.LiveDataReactiveStreams
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.rahmat.app.samplecrudkotlin.R.id.item_recyclerview
 import com.rahmat.app.samplecrudkotlin.adapter.ItemAdapter
 import com.rahmat.app.samplecrudkotlin.db.StudentDao

@@ -1,6 +1,6 @@
 package com.rahmat.app.samplecrudkotlin.di
 
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import com.rahmat.app.samplecrudkotlin.vmfactory.StudentViewModelFactory
 import dagger.Binds
 import dagger.Module

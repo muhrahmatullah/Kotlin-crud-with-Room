@@ -1,8 +1,8 @@
 package com.rahmat.app.samplecrudkotlin.features.detail
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.rahmat.app.samplecrudkotlin.db.repository.LocalRepository
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import com.rahmat.app.samplecrudkotlin.features.base.BaseViewModel
