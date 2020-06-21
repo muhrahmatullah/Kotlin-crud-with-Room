@@ -1,7 +1,7 @@
 package com.rahmat.app.samplecrudkotlin.db.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import com.rahmat.app.samplecrudkotlin.db.StudentDao
 import com.rahmat.app.samplecrudkotlin.entity.Student
 import io.reactivex.Observable

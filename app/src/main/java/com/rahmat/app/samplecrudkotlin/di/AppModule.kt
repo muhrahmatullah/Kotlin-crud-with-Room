@@ -1,7 +1,7 @@
 package com.rahmat.app.samplecrudkotlin.di
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.rahmat.app.samplecrudkotlin.db.StudentDao
 import com.rahmat.app.samplecrudkotlin.db.StudentDatabase

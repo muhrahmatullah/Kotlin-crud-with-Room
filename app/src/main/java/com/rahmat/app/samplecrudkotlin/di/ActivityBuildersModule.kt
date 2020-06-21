@@ -1,6 +1,6 @@
 package com.rahmat.app.samplecrudkotlin.di
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.rahmat.app.samplecrudkotlin.features.detail.DetailActivity
 import com.rahmat.app.samplecrudkotlin.features.detail.DetailViewModel
 import com.rahmat.app.samplecrudkotlin.features.main.MainActivity
